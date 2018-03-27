@@ -1,28 +1,29 @@
 # code here!
-
 class School
-  attr_accessor :name, :roster
+  attr_reader :school
 
-  def initialize(name)
-    @name = name
+  def initialize(school)
+    @school = school
     @roster = {}
   end
 
-  def add_student(student_name, grade)
-    roster[grade] ||= []
-    roster[grade] << student_name
+  def roster
+    @roster
   end
 
-  def grade(student_grade)
-    roster[student_grade]
+  def add_student(name, grade)
+    @roster[grade] = [] if @roster[grade] == nil
+    @roster[grade] << name
   end
 
-  # this method should arrange the students in each grade by alphabetical order
+  def grade(grade)
+    @roster[grade]
+  end
+
   def sort
-    sorted = {}
-    roster.each do |grade, students|
-      sorted[grade] = students.sort
+    @roster.each do |grade, students|
+      @roster[grade] = students.sort
     end
-    sorted
+    @roster
   end
 end
